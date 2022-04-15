@@ -1,7 +1,7 @@
 package com.example.graphsql.service;
 
 import com.example.graphsql.repository.StudentRepository;
-import com.example.graphsql.service.datafetcher.*;
+import com.example.graphsql.service.datafetcher.student.*;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -22,7 +22,7 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    @Value("classpath:student.graphql")
+    @Value("classpath:common.graphql")
     Resource resource;
 
     private GraphQL graphQL;

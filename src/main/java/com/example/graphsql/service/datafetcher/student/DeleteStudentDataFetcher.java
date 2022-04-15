@@ -1,4 +1,4 @@
-package com.example.graphsql.service.datafetcher;
+package com.example.graphsql.service.datafetcher.student;
 
 import com.example.graphsql.entity.Student;
 import com.example.graphsql.repository.StudentRepository;

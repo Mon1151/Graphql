@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "subject")
@@ -18,7 +15,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Subject {
     @Id
-    @GeneratedValue()
-    public Long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 }

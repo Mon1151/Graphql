@@ -1,4 +1,4 @@
-package com.example.graphsql.service.datafetcher;
+package com.example.graphsql.service.datafetcher.student;
 
 import com.example.graphsql.entity.Student;
 import com.example.graphsql.repository.StudentRepository;
@@ -8,15 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddStudentDataFetcher implements DataFetcher<Student> {
+public class UpdateStudentDataFetcher implements DataFetcher<Student> {
     @Autowired
     StudentRepository studentRepository;
 
     @Override
     public Student get(DataFetchingEnvironment environment) {
         Student student = Student.builder()
+                .id(environment.getArgument("id"))
                 .name(environment.getArgument("name"))
-                .address(environment.getArgument("address"))
+                .address((environment.getArgument("address")))
                 .build();
         return studentRepository.save(student);
     }
