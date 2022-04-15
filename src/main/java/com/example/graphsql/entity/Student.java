@@ -1,9 +1,6 @@
 package com.example.graphsql.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,6 +17,6 @@ public class Student {
     private int id;
     private String name;
     private String address;
-    @OneToMany(targetEntity = Student.class, mappedBy = "id")
+    @OneToMany(mappedBy = "student")
     private List<Subject> subjectList;
 }

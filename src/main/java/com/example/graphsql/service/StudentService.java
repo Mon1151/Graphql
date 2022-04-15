@@ -26,20 +26,9 @@ public class StudentService {
     Resource resource;
 
     private GraphQL graphQL;
-    @Autowired
-    private AllStudentDataFetcher allStudentDataFetcher;
 
     @Autowired
     private StudentDataFetcher studentDataFetcher;
-
-    @Autowired
-    private AddStudentDataFetcher addStudentDataFetcher;
-
-    @Autowired
-    private UpdateStudentDataFetcher updateStudentDataFetcher;
-
-    @Autowired
-    private DeleteStudentDataFetcher deleteStudentDataFetcher;
 
     // load schema at application start up
     @PostConstruct
@@ -57,11 +46,11 @@ public class StudentService {
     private RuntimeWiring buildRuntimeWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type("Query", typeWiring -> typeWiring
-                        .dataFetcher("allStudents", allStudentDataFetcher)
-                        .dataFetcher("student", studentDataFetcher)
-                        .dataFetcher("addStudent", addStudentDataFetcher)
-                        .dataFetcher("updateStudent", updateStudentDataFetcher)
-                        .dataFetcher("deleteStudent", deleteStudentDataFetcher))
+                        .dataFetcher("allStudents", studentDataFetcher::get)
+                        .dataFetcher("student", studentDataFetcher::findById)
+                        .dataFetcher("addStudent", studentDataFetcher::create)
+                        .dataFetcher("updateStudent", studentDataFetcher::update)
+                        .dataFetcher("deleteStudent", studentDataFetcher::delete))
                 .build();
     }
 
