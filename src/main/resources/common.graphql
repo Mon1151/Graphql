@@ -1,0 +1,29 @@
+schema {
+    query: Query
+}
+
+type Query {
+    allStudents(pageIndex: Int, pageSize: Int): [Student]
+    student(id: Int): Student
+    addStudent(id: ID, name: String, address: String): Student
+    updateStudent(id: Int!, name: String, address: String): Student
+    deleteStudent(id: Int!): Boolean
+    allSubjects(pageIndex: Int, pageSize: Int): [Subject]
+    subject(id: Int): Subject
+    addSubject(id: ID, name: String, student: Int): Subject
+    updateSubject(id: Int!, name: String, student: Int): Subject
+    deleteSubject(id: Int!): Boolean
+}
+
+type Student {
+    id: Int,
+    name: String,
+    address: String,
+    subjectList: [Subject]
+}
+
+type Subject {
+    id: Int,
+    name: String,
+    student: Student,
+}
