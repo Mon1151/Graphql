@@ -1,10 +1,15 @@
 package com.example.graphsql.service.datafetcher.student;
 
 import com.example.graphsql.entity.Student;
+import com.example.graphsql.entity.Subject;
 import com.example.graphsql.repository.StudentRepository;
 import com.example.graphsql.service.datafetcher.BaseFetchData;
 import graphql.schema.DataFetchingEnvironment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,8 +20,12 @@ public class StudentDataFetcher implements BaseFetchData<Student> {
     StudentRepository studentRepository;
 
     @Override
-    public List<Student> get(DataFetchingEnvironment dataFetchingEnvironment) {
-        return studentRepository.findAll();
+    public Page<Student> get(DataFetchingEnvironment environment) {
+        int first = environment.getArgument("pageIndex");
+        int end = environment.getArgument("pageSize");
+        Pageable pageable = PageRequest.of(first, end, Sort.by(Sort.Direction.ASC, "id"));
+        Page<Student> studentPage = studentRepository.findAll(pageable);
+        return studentPage;
     }
 
     @Override
